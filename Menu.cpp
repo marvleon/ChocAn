@@ -1,17 +1,19 @@
 // This file contains the menu interface for the ChocAn terminal
 
-#include <iostream>
 #include <cstring>
-
-using namespace std;
+#include "provider_directory.h"
 
 void welcome(void);
 int menu(void);
 int member_verify();
 int provider_search();
+int prompt_directory(provider_directory &list);
 
 int main()
 {
+
+    provider_directory service_list; // obj containing a vector of service objects
+
     int user_choice{0};
 
     cout << "\n**** ChocAn Terminal Build 0.1 ****";
@@ -25,7 +27,7 @@ int main()
             member_verify();
             break;
         case 2:
-
+            prompt_directory(service_list);
             break;
         case 3:
 
@@ -111,13 +113,18 @@ int member_verify()
 }
 
 // Test function to enter service code, return service name, and confirm
-int provider_directory()
+int prompt_directory(provider_directory &list)
 {
     int user_input;
-    cout << "\nPlease enter the six-digit service code below";
+    // Load .txt file containing services, codes, and costs
+    list.load("sample_service_list.txt");
+    list.display();
+    cout << "\nPlease enter the six-digit service code below\n";
     cin >> user_input;
     cin.ignore(100, '\n');
     cout << "\nYou entered: " << user_input;
+    // Implement input check to make sure a six-digit number was entered.
+    cout << "\nSearching provider Directory";
     // Function that receives user_input as an argument and returns the service
     // Output the name of the service and prompts confirmation that its correct.
 }

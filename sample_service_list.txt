@@ -1,0 +1,6 @@
+immunization,573395,5
+screening,293537,10
+nutrition,104852,50
+blood work,495839,100
+exercise plan,309249,75
+physical therapy,123503,150
