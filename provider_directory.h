@@ -1,32 +1,29 @@
-// This file contains the class interface for the provider directory class
-// Standard namespace and template library vector located here
-using namespace std;
-#include <fstream>
-#include <iostream>
-#include <string>
-#include <vector>
 
-const int WORD_SIZE{25};
+#ifndef PROVIDER_H
+#define PROVIDER_H
 
-// Service obj, contains data members for a service name, code, and cost
+#include "member_directory.h"
+
+// Provider obj, contains all information pertaining to a provider of ChocAn
 // Functions include create, display
 // Functions to implement: search, compare, get/return
-class service
+
+class provider
 {
 public:
-    service();
-    ~service();
-    int create_service(string set_name, int set_code, int set_cost);
+    provider();
+    ~provider();
+    int create_provider(location_info set_adr, string set_name, int set_id);
     int display(void);
     int compare(int to_compare);
 
 private:
-    string name;
-    int code;
-    int cost;
+    location_info address; // street, city, state, zip_code
+    string name;           // provider first and last
+    int id;                // unique 9 digit int
 };
 
-// Provider Directory obj, contains a vector of services
+// Provider Directory obj, contains a vector of providers
 // Functions include insert, load, display.
 // Functions to implement: search, compare
 class provider_directory
@@ -34,10 +31,12 @@ class provider_directory
 public:
     provider_directory();
     ~provider_directory();
-    int insert(const service &to_add);
+    int insert(const provider &to_add);
     int load(string file_name);
     int display(void);
 
 private:
-    vector<service> service_list;
+    vector<provider> provider_list;
 };
+
+#endif

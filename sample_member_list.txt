@@ -1,0 +1,10 @@
+135151312,Diego Talley,388 Round Alley,75048,Milford village,LA,ACTIVE,0
+192864956,Miles Riggs,351 Merry Ranch,90226,Buchanan village,ND,ACTIVE,0
+420288817,Sandra Veur,359 S Camp,66792,Gruver,TN,ACTIVE,0
+548934723,Alessandra Batenburg,310 Pond Viaduct,95245,Solis,MA,ACTIVE,0
+330694984,Nova Berendse,38 Misty Landing,59418,Gans,SD,ACTIVE,0
+573381460,Dwana Rossum,201 Wagon Underpass,88073,Boothville-Venice,OK,ACTIVE,0
+174425004,Tim Obrien,801 Rocky Square,99079,Dazey,SC,SUSPENDED,500
+533007708,Dewey Zwart,P.O. Box 91081,72937,Thoms Place,WA,ACTIVE,0
+398141622,Cecily Eekhout,651 Red Butterfly Dam,33058,Wheeler,HI,ACTIVE,0
+746302995,Malcom French,946 Easy Fort,13840,Mattoon Village,RI,SUSPENDED,150

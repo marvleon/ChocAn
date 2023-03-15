@@ -1,130 +1,66 @@
-// This file contains the menu interface for the ChocAn terminal
+// This file contains the simulated menu for the testing the ChocAn terminal
 
-#include <cstring>
-#include "provider_directory.h"
+#include "choc_an.h"
 
-void welcome(void);
-int menu(void);
-int member_verify();
-int provider_search();
-int prompt_directory(provider_directory &list);
+int primary_menu(choc_an);
+int options(void);
 
 int main()
 {
+    // service_directory service_list; // obj containing a vector of service objects
+    // member_directory member_list;    // obj containing a vector of member objects
+    // provider_directory provider_list; // obj containing a vector of provider objects
+    choc_an client_test; // data members are class objects for providers, members, and services
+                         // should also include service ledger and report generator
+    primary_menu(client_test);
 
-    provider_directory service_list; // obj containing a vector of service objects
-
+    return 0;
+}
+int primary_menu(choc_an client_test)
+{
     int user_choice{0};
-
-    cout << "\n**** ChocAn Terminal Build 0.1 ****";
 
     do
     {
-        user_choice = menu();
+        user_choice = options();
         switch (user_choice)
         {
-        case 1:
-            member_verify();
+        case 1: // Provider Terminal
+            client_test.provider_menu();
             break;
-        case 2:
-            prompt_directory(service_list);
+        case 2: // Manager Terminal
+            client_test.manager_menu();
             break;
-        case 3:
-
-            break;
-        case 4:
-
-            break;
-        case 5:
-
-            break;
-        case 0:
-
-            break;
+        case 3: // Operater Terminal
+            client_test.operator_menu();
         default:
             break;
         }
     } while (user_choice != 0);
-
-    return 0;
 }
 
-// Welcome text, potential to upload a txt file containing list of members, providers, and services
-void welcome(void)
-{
-    // Logic and file read-in needs heavy work
-    // Low priority
-    char response = 'a';
-
-    cout << "\n******** Welcome to client testing ********";
-
-    cout << "\nWould you like to load in a file? y or n: ";
-    cin >> response;
-    cin.ignore(100, '\n');
-
-    if (response == 'y')
-    {
-        cout << "\nPlease type in a file name below (ex: list.txt)";
-        cout << "\nEnter here: ";
-    }
-}
-// Menu options for the user
-int menu()
+int options(void)
 {
     int user_choice{0};
 
-    cout << "\nPlease select an option from the menu below:";
-    cout << "\n(1) Verify member number";
-    cout << "\n(2) Provider Directory";
-    cout << "\n(3) Manager Report";
-    cout << "\n(4) Provider Report";
-    cout << "\n(5) Member Report";
-    cout << "\n(6) EFT Report";
-    cout << "\n(0) QUIT";
+    cout << "\n**** ChocAn Terminal Build 0.2 ****";
+    cout << "\nPlease select an option from menu below:";
+    cout << "\n\t(1) Provider Terminal";
+    cout << "\n\t(2) Manager Terminal";
+    cout << "\n\t(3) Operator Terminal";
+    cout << "\n\t(0) QUIT";
     cout << "\nEnter here: ";
 
     cin >> user_choice;
     cin.ignore(100, '\n');
 
-    while (user_choice > 7)
+    while (user_choice > 3)
     {
-        cout << "\nOops, thats not an option, please enter a value between 1-6 or 0 to quit";
+        cout << "\nOops, thats not an option, please enter a value between 1-2 or 0 to quit";
         cout << "\nEnter here: ";
         cin >> user_choice;
         cin.ignore(100, '\n');
     }
 
     return user_choice;
-}
-
-// Test function to enter member number and verify member status.
-int member_verify()
-{
-    int user_input;
-    cout << "\nPlease swipe or enter the member number below\n";
-    cin >> user_input;
-    cin.ignore(100, '\n');
-    cout << "\nYou entered: " << user_input;
-    // Function that receives user_input as an argument and verifies member number
-    // Output valid or invalid. If invalid, give reason why. This can be handled
-    // by wrapper function
-
-    return 0;
-}
-
-// Test function to enter service code, return service name, and confirm
-int prompt_directory(provider_directory &list)
-{
-    int user_input;
-    // Load .txt file containing services, codes, and costs
-    list.load("sample_service_list.txt");
-    list.display();
-    cout << "\nPlease enter the six-digit service code below\n";
-    cin >> user_input;
-    cin.ignore(100, '\n');
-    cout << "\nYou entered: " << user_input;
-    // Implement input check to make sure a six-digit number was entered.
-    cout << "\nSearching provider Directory";
-    // Function that receives user_input as an argument and returns the service
-    // Output the name of the service and prompts confirmation that its correct.
 }

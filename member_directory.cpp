@@ -1,43 +1,50 @@
-// This file contains the implementation for the provider_directory ADT
+// This file contains the implementation for the member_directory ADT
 
-#include "provider_directory.h"
+// This file contains the implementation for the member_directory ADT
+
+#include "member_directory.h"
 
 // constructor
-provider::provider(void)
+member::member(void)
 {
     address.street = "";
     address.city = "";
     address.state = "";
     address.zip_code = 0;
     name = "";
+    status = "";
+    balance = 0;
     id = 0;
 }
 
 // destrucutor
-provider::~provider(void)
+member::~member(void)
 {
 }
 
-// Function to display provider status, name, and id
-int provider::display(void)
+// Function to display member status, name, and id
+int member::display(void)
 {
+    cout << "\n\tstatus: " << status;
     cout << "\n\tname: " << name;
     cout << "\n\tid: " << id;
     return 1;
 }
 
-int provider::compare(int to_compare)
+int member::compare(int to_compare)
 {
     return 1;
 }
 
-int provider::create_provider(location_info set_adr, string set_name, int set_id)
+int member::create_member(location_info set_adr, string set_name, string set_status, int set_balance, int set_id)
 {
     address.street = set_adr.street;
     address.city = set_adr.city;
     address.state = set_adr.state;
     address.zip_code = set_adr.zip_code;
     name = set_name;
+    status = set_status;
+    balance = set_balance;
     id = set_id;
     return 1;
 }
@@ -45,27 +52,28 @@ int provider::create_provider(location_info set_adr, string set_name, int set_id
 /*******************/
 
 // constructor
-provider_directory::provider_directory(void)
+member_directory::member_directory(void)
 {
 }
 
 // destructor
-provider_directory::~provider_directory(void) {}
+member_directory::~member_directory(void) {}
 
-// wrapper function to insert a new provider into the vector of providers
-int provider_directory::insert(const provider &to_add)
+// wrapper function to insert a new member into the vector of members
+int member_directory::insert(const member &to_add)
 {
-    provider_list.push_back(to_add);
+    member_list.push_back(to_add);
     return 1;
 }
 
-// loads a list of providers from a .txt file, delimiter ',' comma
-int provider_directory::load(string file_name)
+// loads a list of members from a .txt file, delimiter ',' comma
+int member_directory::load(string file_name)
 {
-    provider a_provider;
+    member a_member;
     location_info adr;
 
     char a_name[WORD_SIZE];
+    char a_status[WORD_SIZE];
     char a_street[WORD_SIZE];
     char a_city[WORD_SIZE];
     char a_state[WORD_SIZE];
@@ -100,13 +108,19 @@ int provider_directory::load(string file_name)
             file_in.get(a_state, WORD_SIZE, ',');
             file_in.ignore(100, ',');
 
+            file_in.get(a_status, WORD_SIZE, ',');
+            file_in.ignore(100, ',');
+
+            file_in >> a_balance;
+            file_in.ignore(100, '\n');
+
             adr.street = a_street;
             adr.city = a_city;
             adr.state = a_state;
             adr.zip_code = a_zip_code;
 
-            a_provider.create_provider(adr, a_name, a_id);
-            insert(a_provider);
+            a_member.create_member(adr, a_name, a_status, a_balance, a_id);
+            insert(a_member);
 
             file_in >> a_id;
             file_in.ignore(100, ',');
@@ -116,12 +130,12 @@ int provider_directory::load(string file_name)
     return 1;
 }
 
-// iterates through the vector of providers and displays their information
-int provider_directory::display(void)
+// iterates through the vector of members and displays their information
+int member_directory::display(void)
 {
-    for (size_t i = 0; i < provider_list.size(); ++i)
+    for (size_t i = 0; i < member_list.size(); ++i)
     {
-        provider_list[i].display();
+        member_list[i].display();
     }
     return 1;
 }
