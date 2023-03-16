@@ -1,14 +1,14 @@
 // This file contains the class interface for the provider directory class
 // Standard namespace and template library vector located here
 
-#ifndef SERVDIRECTORY_H
-#define SERVDIRECTORY_H
+#ifndef SERV_H
+#define SERV_H
 
-using namespace std;
 #include <fstream>
 #include <iostream>
 #include <string>
 #include <vector>
+using namespace std;
 
 const int WORD_SIZE{25};
 

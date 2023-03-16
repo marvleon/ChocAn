@@ -37,13 +37,14 @@ int primary_menu(choc_an client_test)
             break;
         }
     } while (user_choice != 0);
+    return 1;
 }
 
 int options(void)
 {
     int user_choice{0};
 
-    cout << "\n**** ChocAn Terminal Build 0.2 ****";
+    cout << "\n**** ChocAn Terminal Build ****";
     cout << "\nPlease select an option from menu below:";
     cout << "\n\t(1) Provider Terminal";
     cout << "\n\t(2) Manager Terminal";

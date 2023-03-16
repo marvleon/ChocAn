@@ -25,9 +25,9 @@ member::~member(void)
 // Function to display member status, name, and id
 int member::display(void)
 {
-    cout << "\n\tstatus: " << status;
-    cout << "\n\tname: " << name;
+    cout << "\n\t{name: " << name;
     cout << "\n\tid: " << id;
+    cout << "\n\tstatus: " << status << "}";
     return 1;
 }
 
@@ -49,6 +49,18 @@ int member::create_member(location_info set_adr, string set_name, string set_sta
     balance = set_balance;
     id = set_id;
     return 1;
+}
+
+int member::get_status()
+{
+    if (status == "ACTIVE")
+        return 1;
+    return 0;
+}
+
+int member::get_balance()
+{
+    return balance;
 }
 
 /*******************/
@@ -141,22 +153,40 @@ int member_directory::display(void)
     }
     return 1;
 }
-member member_directory::search(int id)
+int member_directory::verify(int id)
 {
     for (size_t i = 0; i < member_list.size(); ++i)
     {
-        if(member_list[i].compare(id))
-            return member_list[i];
-        return; 
+        if (member_list[i].compare(id))
+        {
+            // member found, check account status
+            if (member_list[i].get_status())
+            {
+                // valid account status, return 1 true
+                return 1;
+            }
+            else
+            {
+                // account invalid, return balance
+                return member_list[i].get_balance();
+            }
+        }
     }
+    return 0;
 }
 int member_directory::compare(int compareTo)
 {
     for (size_t i = 0; i < member_list.size(); ++i)
     {
-        if(member_list[i].compare(compareTo))
+        if (member_list[i].compare(compareTo))
             return 1;
-        return 0; 
+        return 0;
     }
+    return 1;
+}
 
+int member_directory::sign_up()
+{
+    // a_member.create_member(adr, a_name, a_status, a_balance, a_id);
+    return 1;
 }

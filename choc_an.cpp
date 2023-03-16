@@ -2,7 +2,7 @@
 
 #include "choc_an.h"
 
-// Constructor
+//  Constructor
 choc_an::choc_an()
 {
 }
@@ -41,6 +41,7 @@ int choc_an::provider_menu()
             break;
         }
     } while (user_choice != 0);
+    return 1;
 }
 
 // Displays the provider options menu
@@ -48,6 +49,7 @@ int choc_an::provider_options()
 {
     int user_choice{0};
 
+    cout << "\n**** Provider Terminal ****";
     cout << "\nPlease select an option from the menu below:";
     cout << "\n(1) Verify member number"; // Verifies member number passed in
     cout << "\n(2) Bill a service";       // Records and logs provided service information
@@ -107,6 +109,7 @@ int choc_an::manager_options()
 {
     int user_choice{0};
 
+    cout << "\n**** Manager Terminal ****";
     cout << "\nPlease select an option from the menu below:";
     cout << "\n(1) Summary Report";  // Weekly report for accounts payable
     cout << "\n(2) Provider Report"; // Find a specific provider, display their report
@@ -140,7 +143,7 @@ int choc_an::operator_menu()
         switch (user_choice)
         {
         case 1:
-            // Function to ADD a member
+            member_list.sign_up();
             break;
         case 2:
             // Function to DELETE a member
@@ -172,6 +175,7 @@ int choc_an::operator_options()
 {
     int user_choice{0};
 
+    cout << "\n**** Operator Terminal ****";
     cout << "\nPlease select an option from the menu below:";
     cout << "\n(1) ADD member";
     cout << "\n(2) DELETE member";
@@ -200,21 +204,49 @@ int choc_an::operator_options()
 int choc_an::member_verify()
 {
     int user_input;
+    int result;
 
     // Load .txt file containing sample ChocAn members
     member_list.load("sample_member_list.txt");
     member_list.display();
 
     cout << "\nPlease swipe or enter the member number below\n";
+    cout << "Enter here: ";
     cin >> user_input;
     cin.ignore(100, '\n');
 
-    cout << "\nYou entered: " << user_input;
-    // Function that receives user_input as an argument and verifies member number
-    // Output valid or invalid. If invalid, give reason why. This can be handled
-    // by wrapper function
+    // Input check for 9-digit number, could use an exit key
+    while (user_input > 1000000000 || user_input < 99999999)
+    {
+        cout << "\nOops, please enter a 9-digit number";
+        cout << "\nEnter here: ";
+        cin >> user_input;
+        cin.ignore(100, '\n');
+    }
 
-    return member_list.compare(user_input);
+    cout << "\nYou entered: " << user_input;
+
+    // returns 1 for valid account, 0 for invalid accout, or the balance of a suspended account
+    result = member_list.verify(user_input);
+
+    if (result == 1)
+    {
+        // valid member prompt
+        cout << "\nVALIDATED";
+    }
+    else if (result == 0)
+    {
+        // invalid member prompt
+        cout << "\nINVALID NUMBER\n";
+    }
+    else
+    {
+        // suspended account
+        int balance = result; // store balance of member
+        cout << "\nMEMBER SUSPENDED: FEES OWED: $" << balance;
+    }
+
+    return 1;
 }
 
 // Test function to enter service code, return service name, and confirm
@@ -236,5 +268,4 @@ int choc_an::service_search()
     // Function that receives user_input as an argument and returns the service
     // Output the name of the service and prompts confirmation that its correct.
     return 1;
-    
 }

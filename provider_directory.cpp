@@ -70,7 +70,6 @@ int provider_directory::load(string file_name)
     char a_city[WORD_SIZE];
     char a_state[WORD_SIZE];
     int a_zip_code;
-    int a_balance;
     int a_id;
 
     ifstream file_in;

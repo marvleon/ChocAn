@@ -24,6 +24,8 @@ public:
     int create_member(location_info set_adr, string set_name, string set_status, int set_balance, int set_id);
     int display(void);
     int compare(int to_compare);
+    int get_balance();
+    int get_status();
 
 private:
     location_info address; // street, city, state, zip_code
@@ -44,8 +46,9 @@ public:
     int insert(const member &to_add);
     int load(string file_name);
     int display(void);
-    member search(int id);
+    int verify(int id);
     int compare(int compareto);
+    int sign_up();
 
 private:
     vector<member> member_list;

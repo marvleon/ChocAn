@@ -43,9 +43,10 @@ public:
         + Modify provider from provider_list
     */
 private:
+    provider_directory provider_list;
+
     service_directory service_list;
     member_directory member_list;
-    provider_directory provider_list;
     // service_ledger object?
 };
 
