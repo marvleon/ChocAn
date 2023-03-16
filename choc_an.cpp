@@ -214,7 +214,7 @@ int choc_an::member_verify()
     // Output valid or invalid. If invalid, give reason why. This can be handled
     // by wrapper function
 
-    return 1;
+    return member_list.compare(user_input);
 }
 
 // Test function to enter service code, return service name, and confirm
@@ -236,4 +236,5 @@ int choc_an::service_search()
     // Function that receives user_input as an argument and returns the service
     // Output the name of the service and prompts confirmation that its correct.
     return 1;
+    
 }
