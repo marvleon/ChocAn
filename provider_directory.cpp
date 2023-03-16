@@ -124,3 +124,61 @@ int provider_directory::display(void)
     }
     return 1;
 }
+
+int provider_directory::sign_up()
+{
+    provider a_provider;
+    location_info adr;
+    char a_name[26];
+    char a_street[26];
+    char a_city[15];
+    char a_state[3];
+    int a_zip_code{0};
+    int a_id{0};
+
+    cout << "\nPlease enter the following information...";
+
+    cout << "\nName: ";
+    cin.get(a_name, 26, '\n');
+    cin.ignore(100, '\n');
+
+    cout << "9-digit ID number: ";
+    cin >> a_id;
+    cin.ignore(100, '\n');
+    while (a_id > 1000000000 || a_id < 99999999)
+    {
+        cout << "\nOops, please enter a 9-digit number";
+        cout << "\nEnter here: ";
+        cin >> a_id;
+        cin.ignore(100, '\n');
+    }
+
+    cout << "Street: ";
+    cin.get(a_street, 26, '\n');
+    cin.ignore(100, '\n');
+
+    cout << "City: ";
+    cin.get(a_city, 26, '\n');
+    cin.ignore(100, '\n');
+
+    cout << "State: ";
+    cin.get(a_state, 3, '\n');
+    cin.ignore(100, '\n');
+
+    cout << "Zip: ";
+    cin >> a_zip_code;
+    cin.ignore(100, '\n');
+
+    cout << "\nYou entered:" << a_name << endl;
+    cout << a_street << endl;
+    cout << a_city << endl;
+    cout << a_state << endl;
+    cout << a_zip_code << endl;
+
+    a_provider.create_provider(adr, a_name, a_id);
+    insert(a_provider);
+
+    cout << "\nProvider added to ChocAn" << endl;
+
+    return 1;
+}

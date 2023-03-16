@@ -185,8 +185,69 @@ int member_directory::compare(int compareTo)
     return 1;
 }
 
+// Prompts for member necessary information as if sign up process were occuring
+// Generate 9-digit id automatically? To decrease chance matching id conflict..?
 int member_directory::sign_up()
 {
-    // a_member.create_member(adr, a_name, a_status, a_balance, a_id);
+    member a_member;
+    location_info adr;
+    char a_name[26];
+    char a_status[] = "ACTIVE";
+    char a_street[26];
+    char a_city[15];
+    char a_state[3];
+    int a_zip_code{0};
+    int a_balance{0};
+    int a_id{0};
+
+    cout << "\nPlease enter the following information...";
+
+    cout << "\nName: ";
+    cin.get(a_name, 26, '\n');
+    cin.ignore(100, '\n');
+
+    cout << "9-digit ID number: ";
+    cin >> a_id;
+    cin.ignore(100, '\n');
+    while (a_id > 1000000000 || a_id < 99999999)
+    {
+        cout << "\nOops, please enter a 9-digit number";
+        cout << "\nEnter here: ";
+        cin >> a_id;
+        cin.ignore(100, '\n');
+    }
+
+    cout << "Street: ";
+    cin.get(a_street, 26, '\n');
+    cin.ignore(100, '\n');
+
+    cout << "City: ";
+    cin.get(a_city, 26, '\n');
+    cin.ignore(100, '\n');
+
+    cout << "State: ";
+    cin.get(a_state, 3, '\n');
+    cin.ignore(100, '\n');
+
+    cout << "Zip: ";
+    cin >> a_zip_code;
+    cin.ignore(100, '\n');
+
+    cout << "\nYou entered:" << a_name << endl;
+    cout << a_street << endl;
+    cout << a_city << endl;
+    cout << a_state << endl;
+    cout << a_zip_code << endl;
+
+    adr.street = a_street;
+    adr.city = a_city;
+    adr.state = a_state;
+    adr.zip_code = a_zip_code;
+
+    a_member.create_member(adr, a_name, a_status, a_balance, a_id);
+    insert(a_member);
+
+    cout << "\nMember added to ChocAn" << endl;
+
     return 1;
 }

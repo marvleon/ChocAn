@@ -34,6 +34,7 @@ public:
     int insert(const provider &to_add);
     int load(string file_name);
     int display(void);
+    int sign_up();
 
 private:
     vector<provider> provider_list;

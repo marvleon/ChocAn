@@ -143,7 +143,7 @@ int choc_an::operator_menu()
         switch (user_choice)
         {
         case 1:
-            member_list.sign_up();
+            member_list.sign_up(); // ADD a member
             break;
         case 2:
             // Function to DELETE a member
@@ -152,7 +152,7 @@ int choc_an::operator_menu()
             // Function to MODIFY a member
             break;
         case 4:
-            // Function to ADD a provider
+            provider_list.sign_up(); // ADD a provider
             break;
         case 5:
             // Function to DELETE a provider
