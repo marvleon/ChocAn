@@ -44,6 +44,8 @@ public:
     int insert(const member &to_add);
     int load(string file_name);
     int display(void);
+    member search(int id);
+    int compare(int compareto);
 
 private:
     vector<member> member_list;

@@ -33,6 +33,8 @@ int member::display(void)
 
 int member::compare(int to_compare)
 {
+    if (to_compare != id)
+        return 0;
     return 1;
 }
 
@@ -138,4 +140,23 @@ int member_directory::display(void)
         member_list[i].display();
     }
     return 1;
+}
+member member_directory::search(int id)
+{
+    for (size_t i = 0; i < member_list.size(); ++i)
+    {
+        if(member_list[i].compare(id))
+            return member_list[i];
+        return; 
+    }
+}
+int member_directory::compare(int compareTo)
+{
+    for (size_t i = 0; i < member_list.size(); ++i)
+    {
+        if(member_list[i].compare(compareTo))
+            return 1;
+        return 0; 
+    }
+
 }
