@@ -91,9 +91,34 @@ int service_directory::load(string file_name)
 // iterates through the vector of services and displays their information
 int service_directory::display(void)
 {
+    cout << "\n---SERVICES---";
     for (size_t i = 0; i < service_list.size(); ++i)
     {
         service_list[i].display();
     }
     return 1;
+}
+
+// iterates through the vector of services to find match using code
+int service_directory::search(int code)
+{
+    for (size_t i = 0; i < service_list.size(); ++i)
+    {
+        if (service_list[i].compare(code))
+        {
+            // service found, output information
+            return service_list[i].display();
+        }
+    }
+    return 0;
+}
+
+int service_directory::compare(int to_compare)
+{
+    for (size_t i = 0; i < service_list.size(); ++i)
+    {
+        if (service_list[i].compare(to_compare))
+            return 1;
+    }
+    return 0;
 }

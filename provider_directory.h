@@ -35,6 +35,8 @@ public:
     int load(string file_name);
     int display(void);
     int sign_up();
+    int remove(int id, provider &to_delete);
+    int modify(int id, provider &to_modify);
 
 private:
     vector<provider> provider_list;

@@ -1,7 +1,5 @@
 // This file contains the implementation for the member_directory ADT
 
-// This file contains the implementation for the member_directory ADT
-
 #include "member_directory.h"
 
 // constructor
@@ -28,6 +26,18 @@ int member::display(void)
     cout << "\n\t{name: " << name;
     cout << "\n\tid: " << id;
     cout << "\n\tstatus: " << status << "}";
+    return 1;
+}
+
+int member::display_all(void)
+{
+    cout << "\n\tname: " << name;
+    cout << "\n\tid: " << id;
+    cout << "\n\tstatus: " << status;
+    cout << "\n\tstreet:" << address.street;
+    cout << "\n\tcity: " << address.city;
+    cout << "\n\tstate: " << address.state;
+    cout << "\n\tzip: " << address.zip_code;
     return 1;
 }
 
@@ -147,12 +157,15 @@ int member_directory::load(string file_name)
 // iterates through the vector of members and displays their information
 int member_directory::display(void)
 {
+    cout << "\n---MEMBERS---";
     for (size_t i = 0; i < member_list.size(); ++i)
     {
         member_list[i].display();
     }
     return 1;
 }
+
+// iterates through member_list, finds match, returns result
 int member_directory::verify(int id)
 {
     for (size_t i = 0; i < member_list.size(); ++i)
@@ -174,15 +187,16 @@ int member_directory::verify(int id)
     }
     return 0;
 }
-int member_directory::compare(int compareTo)
+
+// iterates throught the vector of members and compares id
+int member_directory::compare_wrapper(int compareTo)
 {
     for (size_t i = 0; i < member_list.size(); ++i)
     {
         if (member_list[i].compare(compareTo))
             return 1;
-        return 0;
     }
-    return 1;
+    return 0;
 }
 
 // Prompts for member necessary information as if sign up process were occuring
@@ -247,7 +261,36 @@ int member_directory::sign_up()
     a_member.create_member(adr, a_name, a_status, a_balance, a_id);
     insert(a_member);
 
-    cout << "\nMember added to ChocAn" << endl;
-
     return 1;
+}
+
+int member_directory::remove(int id, member &to_delete)
+{
+    for (size_t i = 0; i < member_list.size(); ++i)
+    {
+        if (member_list[i].compare(id))
+        {
+            // member found, now remove
+            to_delete = member_list[i];
+            member_list.erase(member_list.begin() + i);
+            return 1;
+        }
+    }
+    return 0;
+}
+
+int member_directory::modify(int id, member &to_modify)
+{
+    for (size_t i = 0; i < member_list.size(); ++i)
+    {
+        if (member_list[i].compare(id))
+        {
+            // member found, now prompt to modify contents
+            to_modify = member_list[i];
+            cout << "\nOld member information:" << endl;
+            to_modify.display_all();
+            return sign_up();
+        }
+    }
+    return 0;
 }

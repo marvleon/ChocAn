@@ -23,6 +23,7 @@ public:
     ~member();
     int create_member(location_info set_adr, string set_name, string set_status, int set_balance, int set_id);
     int display(void);
+    int display_all(void);
     int compare(int to_compare);
     int get_balance();
     int get_status();
@@ -47,8 +48,10 @@ public:
     int load(string file_name);
     int display(void);
     int verify(int id);
-    int compare(int compareto);
+    int compare_wrapper(int compareTo);
     int sign_up();
+    int remove(int id, member &to_delete);
+    int modify(int id, member &to_modify);
 
 private:
     vector<member> member_list;

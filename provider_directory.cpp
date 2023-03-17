@@ -23,6 +23,10 @@ int provider::display(void)
 {
     cout << "\n\tname: " << name;
     cout << "\n\tid: " << id;
+    cout << "\n\tstreet: " << address.street;
+    cout << "\n\tcity: " << address.city;
+    cout << "\n\tstate: " << address.state;
+    cout << "\n\tzip code: " << address.zip_code;
     return 1;
 }
 
@@ -77,8 +81,6 @@ int provider_directory::load(string file_name)
 
     if (file_in)
     {
-        cout << "File opened\n";
-
         file_in >> a_id;
         file_in.ignore(100, ',');
 
@@ -97,7 +99,7 @@ int provider_directory::load(string file_name)
             file_in.ignore(100, ',');
 
             file_in.get(a_state, WORD_SIZE, ',');
-            file_in.ignore(100, ',');
+            file_in.ignore(100, '\n');
 
             adr.street = a_street;
             adr.city = a_city;
@@ -118,6 +120,7 @@ int provider_directory::load(string file_name)
 // iterates through the vector of providers and displays their information
 int provider_directory::display(void)
 {
+    cout << "\n---PROVIDERS---";
     for (size_t i = 0; i < provider_list.size(); ++i)
     {
         provider_list[i].display();
@@ -178,7 +181,36 @@ int provider_directory::sign_up()
     a_provider.create_provider(adr, a_name, a_id);
     insert(a_provider);
 
-    cout << "\nProvider added to ChocAn" << endl;
-
     return 1;
+}
+
+int provider_directory::remove(int id, provider &to_delete)
+{
+    for (size_t i = 0; i < provider_list.size(); ++i)
+    {
+        if (provider_list[i].compare(id))
+        {
+            // member found, now remove
+            to_delete = provider_list[i];
+            provider_list.erase(provider_list.begin() + i);
+            return 1;
+        }
+    }
+    return 0;
+}
+
+int provider_directory::modify(int id, provider &to_modify)
+{
+    for (size_t i = 0; i < provider_list.size(); ++i)
+    {
+        if (provider_list[i].compare(id))
+        {
+            // member found, now prompt to modify contents
+            to_modify = provider_list[i];
+            cout << "\nOld member information:" << endl;
+            to_modify.display();
+            return sign_up();
+        }
+    }
+    return 0;
 }

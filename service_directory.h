@@ -21,8 +21,8 @@ public:
     service();
     ~service();
     int create_service(string set_name, int set_code, int set_cost);
-    int display(void);
     int compare(int to_compare);
+    int display(void);
 
 private:
     string name;
@@ -40,6 +40,8 @@ public:
     ~service_directory();
     int insert(const service &to_add);
     int load(string file_name);
+    int compare(int to_compare);
+    int search(int to_compare);
     int display(void);
 
 private:

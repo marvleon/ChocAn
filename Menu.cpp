@@ -33,6 +33,10 @@ int primary_menu(choc_an client_test)
             break;
         case 3: // Operater Terminal
             client_test.operator_menu();
+            break;
+        case 4: // Load sample data
+            client_test.load();
+            break;
         default:
             break;
         }
@@ -49,13 +53,14 @@ int options(void)
     cout << "\n\t(1) Provider Terminal";
     cout << "\n\t(2) Manager Terminal";
     cout << "\n\t(3) Operator Terminal";
+    cout << "\n\t(4) LOAD SAMPLE DATA";
     cout << "\n\t(0) QUIT";
     cout << "\nEnter here: ";
 
     cin >> user_choice;
     cin.ignore(100, '\n');
 
-    while (user_choice > 3)
+    while (user_choice > 4)
     {
         cout << "\nOops, thats not an option, please enter a value between 1-2 or 0 to quit";
         cout << "\nEnter here: ";
